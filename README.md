@@ -32,7 +32,7 @@ Demostrar competencias en la **implementación de un Sistema de Gestión de Higi
 
 ---
 
-
+file:///C:/Users/LENOVO/Desktop/Metalform/diagramas_proceso_layout_metalform.html
 
 ## 🛠️ Herramientas utilizadas
 
