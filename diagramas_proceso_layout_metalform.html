@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>METALFORM — Diagramas de proceso y layout</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy:#1F3864;--blue:#2E75B6;--white:#FFFFFF;--mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans);background:#0D1B2A;color:#E8EDF2;}
+  .header{background:linear-gradient(135deg,#0D1B2A,#1F3864 60%,#2E75B6);padding:22px 32px 16px;border-bottom:2px solid var(--blue);display:flex;align-items:center;justify-content:space-between;}
+  .h-left{display:flex;flex-direction:column;gap:4px;}
+  .company{font-family:var(--mono);font-size:10px;color:var(--blue);letter-spacing:3px;}
+  .title{font-size:18px;font-weight:700;}
+  .sub{font-family:var(--mono);font-size:9px;color:#8BA0B8;letter-spacing:1px;}
+  .badge{font-family:var(--mono);font-size:10px;background:var(--blue);color:#fff;padding:4px 10px;border-radius:3px;letter-spacing:1px;}
+  .tabs{display:flex;gap:2px;padding:14px 32px 0;background:#0D1B2A;}
+  .tab{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:7px 18px;border:none;background:#162233;color:#8BA0B8;cursor:pointer;border-radius:4px 4px 0 0;transition:all .2s;border-top:2px solid transparent;}
+  .tab:hover{background:#1F3864;color:#C0D0E0;}
+  .tab.active{background:#1A2E45;color:#E8EDF2;border-top-color:var(--blue);}
+  .content{padding:24px 32px;max-width:1300px;margin:0 auto;}
+  .page{display:none;}
+  .page.active{display:block;}
+  .sec-title{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+  .sec-title::after{content:'';flex:1;height:1px;background:#1F3864;}
+  .diagram-box{background:#162233;border:1px solid #1F3864;border-radius:6px;padding:24px;margin-bottom:20px;overflow-x:auto;}
+  .diagram-title{font-family:var(--mono);font-size:10px;color:#8BA0B8;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px;font-family:var(--mono);font-size:10px;color:#8BA0B8;}
+  .leg-item{display:flex;align-items:center;gap:6px;}
+  .leg-dot{width:12px;height:12px;border-radius:2px;flex-shrink:0;}
+  .note{font-family:var(--mono);font-size:9px;color:#5A7A9A;margin-top:12px;padding:8px 12px;border-left:2px solid #1F3864;background:#0D1B2A;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="h-left">
+    <span class="company">METALFORM S.A. de C.V.</span>
+    <span class="title">Diagramas de proceso y layout de planta</span>
+    <span class="sub">Módulo 06 del portafolio SGC · PRD-DFP-001 &amp; PRD-LAY-001</span>
+  </div>
+  <span class="badge">Rev 01 · 2026-03-23</span>
+</div>
+<div class="tabs">
+  <button class="tab active" onclick="show('flujo',this)">Diagrama de flujo</button>
+  <button class="tab" onclick="show('layout',this)">Layout de planta</button>
+  <button class="tab" onclick="show('criticos',this)">Puntos críticos</button>
+</div>
+
+<div class="content">
+
+<!-- ══════════ FLUJO ══════════ -->
+<div class="page active" id="flujo">
+  <p class="sec-title">Diagrama de flujo del proceso productivo</p>
+  <div class="diagram-box">
+    <div class="diagram-title">PRD-DFP-001 · Flujo con puntos de control de calidad e indicadores HSE</div>
+    <svg width="100%" viewBox="0 0 780 960" style="min-width:600px">
+      <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+      <!-- LEYENDA -->
+      <text x="80" y="36" text-anchor="middle" fill="#8BA0B8" font-family="IBM Plex Mono" font-size="10">LEYENDA</text>
+      <rect x="30" y="46" width="100" height="26" rx="6" fill="#1A2E45" stroke="#2E75B6" stroke-width="1"/>
+      <text x="80" y="64" text-anchor="middle" fill="#90CAF9" font-family="IBM Plex Sans" font-size="11">Logística</text>
+      <rect x="30" y="82" width="100" height="26" rx="6" fill="#1A3020" stroke="#4CAF50" stroke-width="1"/>
+      <text x="80" y="100" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Sans" font-size="11">Fabricación</text>
+      <rect x="30" y="118" width="100" height="26" rx="6" fill="#1E1A30" stroke="#7C4DFF" stroke-width="1"/>
+      <text x="80" y="136" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Sans" font-size="11">Pintura</text>
+      <polygon points="80,162 110,178 80,194 50,178" fill="#0D1B2A" stroke="#FFC107" stroke-width="1.2"/>
+      <text x="80" y="182" text-anchor="middle" fill="#FFC107" font-family="IBM Plex Mono" font-size="10">Inspec.</text>
+      <rect x="30" y="206" width="100" height="26" rx="6" fill="#1A0A0A" stroke="#E53935" stroke-width="1"/>
+      <text x="80" y="224" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Sans" font-size="11">Rechazo/NC</text>
+
+      <!-- PROCESO PRINCIPAL — columna x=240..440, center=340 -->
+
+      <!-- 1 Recepción MP -->
+      <rect x="240" y="20" width="200" height="48" rx="8" fill="#1A2E45" stroke="#2E75B6" stroke-width="1"/>
+      <text x="340" y="40" text-anchor="middle" fill="#E8EDF2" font-family="IBM Plex Sans" font-size="13" font-weight="600">Recepción materia prima</text>
+      <text x="340" y="56" text-anchor="middle" fill="#8BA0B8" font-family="IBM Plex Mono" font-size="10">Alambrón · microalambre · químicos</text>
+      <line x1="340" y1="68" x2="340" y2="96" stroke="#2E75B6" stroke-width="1.2" marker-end="url(#a)"/>
+
+      <!-- Inspección entrada -->
+      <polygon points="340,100 382,122 340,144 298,122" fill="#0D1B2A" stroke="#FFC107" stroke-width="1.2"/>
+      <text x="340" y="118" text-anchor="middle" fill="#FFC107" font-family="IBM Plex Mono" font-size="10" font-weight="600">Inspección</text>
+      <text x="340" y="132" text-anchor="middle" fill="#FFC107" font-family="IBM Plex Mono" font-size="10">entrada MP</text>
+      <line x1="382" y1="122" x2="492" y2="122" stroke="#E53935" stroke-width="1" marker-end="url(#a)"/>
+      <text x="434" y="114" text-anchor="middle" fill="#E53935" font-family="IBM Plex Mono" font-size="10">NG</text>
+      <rect x="492" y="104" width="110" height="36" rx="5" fill="#1A0A0A" stroke="#E53935" stroke-width="1"/>
+      <text x="547" y="118" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="10">Rechazo</text>
+      <text x="547" y="132" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="10">a proveedor</text>
+      <line x1="340" y1="144" x2="340" y2="168" stroke="#4CAF50" stroke-width="1.2" marker-end="url(#a)"/>
+      <text x="352" y="160" fill="#4CAF50" font-family="IBM Plex Mono" font-size="10">OK</text>
+
+      <!-- 2 Almacén MP -->
+      <rect x="240" y="168" width="200" height="42" rx="8" fill="#1A2E45" stroke="#2E75B6" stroke-width="1"/>
+      <text x="340" y="185" text-anchor="middle" fill="#E8EDF2" font-family="IBM Plex Sans" font-size="13" font-weight="600">Almacén materia prima</text>
+      <text x="340" y="200" text-anchor="middle" fill="#8BA0B8" font-family="IBM Plex Mono" font-size="10">Control stock · FIFO</text>
+      <line x1="340" y1="210" x2="340" y2="234" stroke="#2E75B6" stroke-width="1.2" marker-end="url(#a)"/>
+
+      <!-- 3 Enderezado -->
+      <rect x="240" y="234" width="200" height="42" rx="8" fill="#1A3020" stroke="#4CAF50" stroke-width="1"/>
+      <text x="340" y="251" text-anchor="middle" fill="#C8E6C9" font-family="IBM Plex Sans" font-size="13" font-weight="600">Enderezado</text>
+      <text x="340" y="265" text-anchor="middle" fill="#81C784" font-family="IBM Plex Mono" font-size="10">Enderezadora de alambrón</text>
+      <line x1="340" y1="276" x2="340" y2="300" stroke="#2E75B6" stroke-width="1.2" marker-end="url(#a)"/>
+
+      <!-- 4 Corte -->
+      <rect x="240" y="300" width="200" height="42" rx="8" fill="#1A3020" stroke="#4CAF50" stroke-width="1"/>
+      <text x="340" y="317" text-anchor="middle" fill="#C8E6C9" font-family="IBM Plex Sans" font-size="13" font-weight="600">Corte</text>
+      <text x="340" y="331" text-anchor="middle" fill="#81C784" font-family="IBM Plex Mono" font-size="10">Cortadora · longitudes según plano</text>
+      <line x1="340" y1="342" x2="340" y2="366" stroke="#2E75B6" stroke-width="1.2" marker-end="url(#a)"/>
+
+      <!-- 5 Doblado -->
+      <rect x="240" y="366" width="200" height="42" rx="8" fill="#1A3020" stroke="#4CAF50" stroke-width="1"/>
+      <text x="340" y="383" text-anchor="middle" fill="#C8E6C9" font-family="IBM Plex Sans" font-size="13" font-weight="600">Doblado y troquelado</text>
+      <text x="340" y="397" text-anchor="middle" fill="#81C784" font-family="IBM Plex Mono" font-size="10">Dobladora CNC · troqueladora</text>
+      <line x1="340" y1="408" x2="340" y2="432" stroke="#2E75B6" stroke-width="1.2" marker-end="url(#a)"/>
+
+      <!-- 6 Soldadura -->
+      <rect x="240" y="432" width="200" height="42" rx="8" fill="#1E2A10" stroke="#8BC34A" stroke-width="1.5"/>
+      <text x="340" y="449" text-anchor="middle" fill="#DCEDC8" font-family="IBM Plex Sans" font-size="13" font-weight="600">Soldadura MIG</text>
+      <text x="340" y="463" text-anchor="middle" fill="#AED581" font-family="IBM Plex Mono" font-size="10">Ensamble de estructura</text>
+      <line x1="340" y1="474" x2="340" y2="498" stroke="#2E75B6" stroke-width="1.2" marker-end="url(#a)"/>
+
+      <!-- Inspección soldadura -->
+      <polygon points="340,502 382,524 340,546 298,524" fill="#0D1B2A" stroke="#FFC107" stroke-width="1.2"/>
+      <text x="340" y="520" text-anchor="middle" fill="#FFC107" font-family="IBM Plex Mono" font-size="10" font-weight="600">Inspección</text>
+      <text x="340" y="534" text-anchor="middle" fill="#FFC107" font-family="IBM Plex Mono" font-size="10">soldadura</text>
+      <path d="M298 524 L196 524 L196 453" fill="none" stroke="#E53935" stroke-width="1" marker-end="url(#a)"/>
+      <text x="240" y="516" text-anchor="middle" fill="#E53935" font-family="IBM Plex Mono" font-size="10">NG → retrabajo</text>
+      <line x1="340" y1="546" x2="340" y2="570" stroke="#4CAF50" stroke-width="1.2" marker-end="url(#a)"/>
+      <text x="352" y="562" fill="#4CAF50" font-family="IBM Plex Mono" font-size="10">OK</text>
+
+      <!-- 7 Pulido -->
+      <rect x="240" y="570" width="200" height="42" rx="8" fill="#1A3020" stroke="#4CAF50" stroke-width="1"/>
+      <text x="340" y="587" text-anchor="middle" fill="#C8E6C9" font-family="IBM Plex Sans" font-size="13" font-weight="600">Pulido</text>
+      <text x="340" y="601" text-anchor="middle" fill="#81C784" font-family="IBM Plex Mono" font-size="10">Esmeriladora · acabado superficial</text>
+      <line x1="340" y1="612" x2="340" y2="636" stroke="#2E75B6" stroke-width="1.2" marker-end="url(#a)"/>
+
+      <!-- 8 Pintura -->
+      <rect x="240" y="636" width="200" height="42" rx="8" fill="#1E1A30" stroke="#7C4DFF" stroke-width="1.2"/>
+      <text x="340" y="653" text-anchor="middle" fill="#D1C4E9" font-family="IBM Plex Sans" font-size="13" font-weight="600">Pintura electrostática</text>
+      <text x="340" y="667" text-anchor="middle" fill="#B39DDB" font-family="IBM Plex Mono" font-size="10">Pretratamiento · horno curado</text>
+      <line x1="340" y1="678" x2="340" y2="702" stroke="#2E75B6" stroke-width="1.2" marker-end="url(#a)"/>
+
+      <!-- Inspección final -->
+      <polygon points="340,706 384,730 340,754 296,730" fill="#0D1B2A" stroke="#FFC107" stroke-width="1.5"/>
+      <text x="340" y="726" text-anchor="middle" fill="#FFC107" font-family="IBM Plex Mono" font-size="11" font-weight="600">Inspección</text>
+      <text x="340" y="740" text-anchor="middle" fill="#FFC107" font-family="IBM Plex Mono" font-size="10">final 100%</text>
+      <line x1="384" y1="730" x2="514" y2="730" stroke="#E53935" stroke-width="1" marker-end="url(#a)"/>
+      <text x="447" y="722" text-anchor="middle" fill="#E53935" font-family="IBM Plex Mono" font-size="10">NG</text>
+      <rect x="514" y="712" width="120" height="36" rx="5" fill="#1A0A0A" stroke="#E53935" stroke-width="1"/>
+      <text x="574" y="726" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="10">Retrabajo /</text>
+      <text x="574" y="740" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="10">scrap</text>
+      <line x1="340" y1="754" x2="340" y2="778" stroke="#4CAF50" stroke-width="1.2" marker-end="url(#a)"/>
+      <text x="352" y="770" fill="#4CAF50" font-family="IBM Plex Mono" font-size="10">OK</text>
+
+      <!-- 9 Embalaje -->
+      <rect x="240" y="778" width="200" height="42" rx="8" fill="#1A2E45" stroke="#2E75B6" stroke-width="1"/>
+      <text x="340" y="795" text-anchor="middle" fill="#E8EDF2" font-family="IBM Plex Sans" font-size="13" font-weight="600">Embalaje y almacén PT</text>
+      <text x="340" y="809" text-anchor="middle" fill="#8BA0B8" font-family="IBM Plex Mono" font-size="10">Etiquetado · lote · fecha</text>
+      <line x1="340" y1="820" x2="340" y2="844" stroke="#2E75B6" stroke-width="1.2" marker-end="url(#a)"/>
+
+      <!-- 10 Entrega -->
+      <rect x="240" y="844" width="200" height="42" rx="8" fill="#0A1E10" stroke="#4CAF50" stroke-width="2"/>
+      <text x="340" y="861" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Sans" font-size="13" font-weight="700">Entrega al cliente</text>
+      <text x="340" y="875" text-anchor="middle" fill="#81C784" font-family="IBM Plex Mono" font-size="10">Remisión · trazabilidad de lote</text>
+
+      <!-- HSE anotaciones -->
+      <text x="650" y="258" text-anchor="middle" fill="#8BA0B8" font-family="IBM Plex Mono" font-size="9">RIESGOS HSE</text>
+      <line x1="440" y1="252" x2="590" y2="252" stroke="#EF5350" stroke-width="0.8" stroke-dasharray="4 3"/>
+      <text x="594" y="248" fill="#EF5350" font-family="IBM Plex Mono" font-size="9">Ruido · partículas</text>
+      <line x1="440" y1="384" x2="590" y2="384" stroke="#EF5350" stroke-width="0.8" stroke-dasharray="4 3"/>
+      <text x="594" y="380" fill="#EF5350" font-family="IBM Plex Mono" font-size="9">Vibración · atrapamiento</text>
+      <line x1="440" y1="450" x2="590" y2="450" stroke="#FF8C42" stroke-width="0.8" stroke-dasharray="4 3"/>
+      <text x="594" y="446" fill="#FF8C42" font-family="IBM Plex Mono" font-size="9">Humos MIG · UV</text>
+      <line x1="440" y1="654" x2="590" y2="654" stroke="#EF5350" stroke-width="0.8" stroke-dasharray="4 3"/>
+      <text x="594" y="650" fill="#EF5350" font-family="IBM Plex Mono" font-size="9">Solventes · sulfatos</text>
+    </svg>
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:#2E75B6"></div>Logística</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#4CAF50"></div>Fabricación</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#7C4DFF"></div>Pintura especial</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#FFC107"></div>Control de calidad</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#E53935"></div>No conformidad</div>
+    </div>
+    <div class="note">PRD-DFP-001 · Rev 01 · 2026-03-23 · Las anotaciones en rojo corresponden a riesgos identificados en HSE-MTR-RGM-001.</div>
+  </div>
+</div>
+
+<!-- ══════════ LAYOUT ══════════ -->
+<div class="page" id="layout">
+  <p class="sec-title">Layout de planta — propuesta de delimitación de áreas</p>
+  <div class="diagram-box">
+    <div class="diagram-title">PRD-LAY-001 · Estado propuesto · escala aproximada</div>
+    <svg width="100%" viewBox="0 0 780 620" style="min-width:600px">
+      <defs><marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+      <!-- PERÍMETRO -->
+      <rect x="20" y="24" width="740" height="574" rx="4" fill="none" stroke="#2E75B6" stroke-width="2"/>
+      <text x="390" y="16" text-anchor="middle" fill="#2E75B6" font-family="IBM Plex Mono" font-size="10" font-weight="600">METALFORM — PLANTA DE PRODUCCIÓN (layout propuesto)</text>
+
+      <!-- ACCESO -->
+      <rect x="340" y="568" width="100" height="30" rx="0" fill="#0D1B2A" stroke="#4CAF50" stroke-width="1.5"/>
+      <text x="390" y="588" text-anchor="middle" fill="#4CAF50" font-family="IBM Plex Mono" font-size="10" font-weight="600">ACCESO PRINCIPAL</text>
+
+      <!-- 1 Recepción MP -->
+      <rect x="30" y="34" width="138" height="88" rx="4" fill="#1A2E45" stroke="#2E75B6" stroke-width="1.2"/>
+      <text x="99" y="58" text-anchor="middle" fill="#90CAF9" font-family="IBM Plex Sans" font-size="11" font-weight="600">Recepción MP</text>
+      <text x="99" y="74" text-anchor="middle" fill="#90CAF9" font-family="IBM Plex Sans" font-size="11" font-weight="600">y almacén</text>
+      <text x="99" y="92" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Mono" font-size="9">FIFO · pesaje · stock</text>
+      <text x="99" y="106" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Mono" font-size="9">Control de entrada</text>
+
+      <!-- 2 Enderezado + Corte -->
+      <rect x="30" y="134" width="138" height="110" rx="4" fill="#1A3020" stroke="#4CAF50" stroke-width="1.2"/>
+      <text x="99" y="157" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Sans" font-size="11" font-weight="600">Enderezado</text>
+      <text x="99" y="172" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Sans" font-size="11" font-weight="600">y corte</text>
+      <text x="99" y="192" text-anchor="middle" fill="#5A9A6A" font-family="IBM Plex Mono" font-size="9">Enderezadora</text>
+      <text x="99" y="205" text-anchor="middle" fill="#5A9A6A" font-family="IBM Plex Mono" font-size="9">Cortadora</text>
+      <text x="99" y="220" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">⚠ Ruido · Partículas</text>
+      <text x="99" y="234" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">EPA obligatoria</text>
+
+      <!-- 3 Doblado -->
+      <rect x="30" y="256" width="138" height="114" rx="4" fill="#1A3020" stroke="#4CAF50" stroke-width="1.2"/>
+      <text x="99" y="279" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Sans" font-size="11" font-weight="600">Doblado</text>
+      <text x="99" y="294" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Sans" font-size="11" font-weight="600">y troquelado</text>
+      <text x="99" y="314" text-anchor="middle" fill="#5A9A6A" font-family="IBM Plex Mono" font-size="9">Dobladora CNC</text>
+      <text x="99" y="327" text-anchor="middle" fill="#5A9A6A" font-family="IBM Plex Mono" font-size="9">Troqueladora</text>
+      <text x="99" y="342" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">⚠ Vibración · Ruido</text>
+      <text x="99" y="356" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">⚠ Atrapamiento</text>
+
+      <!-- 4 ZONA SOLDADURA -->
+      <rect x="186" y="34" width="168" height="204" rx="4" fill="#1E2A10" stroke="#FF6D00" stroke-width="1.8" stroke-dasharray="6 3"/>
+      <text x="270" y="58" text-anchor="middle" fill="#FFAB40" font-family="IBM Plex Sans" font-size="11" font-weight="700">ZONA SOLDADURA</text>
+      <text x="270" y="73" text-anchor="middle" fill="#FFAB40" font-family="IBM Plex Sans" font-size="11" font-weight="700">MIG</text>
+      <text x="270" y="90" text-anchor="middle" fill="#FF8A65" font-family="IBM Plex Mono" font-size="9">Acceso restringido</text>
+      <text x="270" y="103" text-anchor="middle" fill="#FF8A65" font-family="IBM Plex Mono" font-size="9">Cortinas ignífugas</text>
+      <rect x="198" y="116" width="64" height="34" rx="3" fill="#0D1B2A" stroke="#FF6D00" stroke-width="1"/>
+      <text x="230" y="130" text-anchor="middle" fill="#FFAB40" font-family="IBM Plex Mono" font-size="9">MIG #1</text>
+      <text x="230" y="142" text-anchor="middle" fill="#FFAB40" font-family="IBM Plex Mono" font-size="9">Extractor</text>
+      <rect x="286" y="116" width="60" height="34" rx="3" fill="#0D1B2A" stroke="#FF6D00" stroke-width="1"/>
+      <text x="316" y="130" text-anchor="middle" fill="#FFAB40" font-family="IBM Plex Mono" font-size="9">MIG #2</text>
+      <text x="316" y="142" text-anchor="middle" fill="#FFAB40" font-family="IBM Plex Mono" font-size="9">Extractor</text>
+      <text x="270" y="174" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">⚠ Humos · Radiación UV</text>
+      <text x="270" y="187" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">EPP completo obligatorio</text>
+      <text x="270" y="200" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">HSE-PRG-SOL-001</text>
+      <text x="270" y="228" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">⚠ EP zona peligrosa</text>
+
+      <!-- 5 Pulido -->
+      <rect x="186" y="252" width="168" height="84" rx="4" fill="#1A3020" stroke="#4CAF50" stroke-width="1.2"/>
+      <text x="270" y="277" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Sans" font-size="11" font-weight="600">Pulido</text>
+      <text x="270" y="293" text-anchor="middle" fill="#5A9A6A" font-family="IBM Plex Mono" font-size="9">Esmeriladora angular</text>
+      <text x="270" y="308" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">⚠ Polvo · Ruido · Vibración</text>
+      <text x="270" y="323" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">EPA auditiva + respiratoria</text>
+
+      <!-- 6 PINTURA -->
+      <rect x="372" y="34" width="178" height="194" rx="4" fill="#1E1A30" stroke="#7C4DFF" stroke-width="1.8" stroke-dasharray="5 3"/>
+      <text x="461" y="57" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Sans" font-size="11" font-weight="700">PINTURA</text>
+      <text x="461" y="72" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Sans" font-size="11" font-weight="700">ELECTROSTÁTICA</text>
+      <rect x="386" y="86" width="72" height="80" rx="3" fill="#120E20" stroke="#7C4DFF" stroke-width="1"/>
+      <text x="422" y="112" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Mono" font-size="9">Cabina de</text>
+      <text x="422" y="124" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Mono" font-size="9">pintado</text>
+      <text x="422" y="144" text-anchor="middle" fill="#9C6DB8" font-family="IBM Plex Mono" font-size="9">Extracción</text>
+      <text x="422" y="156" text-anchor="middle" fill="#9C6DB8" font-family="IBM Plex Mono" font-size="9">forzada</text>
+      <rect x="472" y="86" width="68" height="80" rx="3" fill="#1E1008" stroke="#FF6D00" stroke-width="1"/>
+      <text x="506" y="112" text-anchor="middle" fill="#FFAB40" font-family="IBM Plex Mono" font-size="9">Horno</text>
+      <text x="506" y="124" text-anchor="middle" fill="#FFAB40" font-family="IBM Plex Mono" font-size="9">curado</text>
+      <text x="506" y="144" text-anchor="middle" fill="#FF8A65" font-family="IBM Plex Mono" font-size="9">200°C</text>
+      <text x="461" y="196" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">⚠ Solventes · Sulfatos · Elec.</text>
+      <text x="461" y="214" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">AC-007 activa</text>
+
+      <!-- 7 Inspección final -->
+      <rect x="372" y="242" width="178" height="94" rx="4" fill="#1A1A0A" stroke="#FFC107" stroke-width="1.8"/>
+      <text x="461" y="270" text-anchor="middle" fill="#FFE082" font-family="IBM Plex Sans" font-size="11" font-weight="700">Inspección final</text>
+      <text x="461" y="288" text-anchor="middle" fill="#FFB300" font-family="IBM Plex Mono" font-size="9">Mesa · calibres · plantillas</text>
+      <text x="461" y="303" text-anchor="middle" fill="#FFB300" font-family="IBM Plex Mono" font-size="9">Plan control PRD-PLC-001</text>
+      <text x="461" y="318" text-anchor="middle" fill="#FFB300" font-family="IBM Plex Mono" font-size="9">100% inspección visual</text>
+
+      <!-- 8 Embalaje + Almacén PT -->
+      <rect x="568" y="34" width="164" height="194" rx="4" fill="#1A2E45" stroke="#2E75B6" stroke-width="1.2"/>
+      <text x="650" y="58" text-anchor="middle" fill="#90CAF9" font-family="IBM Plex Sans" font-size="11" font-weight="600">Embalaje</text>
+      <text x="650" y="76" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Mono" font-size="9">Mesa embalaje</text>
+      <text x="650" y="89" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Mono" font-size="9">Etiquetadora</text>
+      <line x1="578" y1="118" x2="722" y2="118" stroke="#1F3864" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="650" y="138" text-anchor="middle" fill="#90CAF9" font-family="IBM Plex Sans" font-size="11" font-weight="600">Almacén PT</text>
+      <text x="650" y="156" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Mono" font-size="9">Racks · FIFO</text>
+      <text x="650" y="170" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Mono" font-size="9">Control lote · despacho</text>
+      <text x="650" y="198" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">⚠ Cargas manuales</text>
+      <text x="650" y="212" text-anchor="middle" fill="#E57373" font-family="IBM Plex Mono" font-size="9">NOM-036-1</text>
+
+      <!-- 9 Calidad / Oficinas -->
+      <rect x="568" y="242" width="164" height="94" rx="4" fill="#162233" stroke="#2E75B6" stroke-width="1"/>
+      <text x="650" y="270" text-anchor="middle" fill="#90CAF9" font-family="IBM Plex Sans" font-size="11" font-weight="600">Calidad / Oficinas</text>
+      <text x="650" y="288" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Mono" font-size="9">SGC · documentación</text>
+      <text x="650" y="302" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Mono" font-size="9">KPIs · indicadores</text>
+      <text x="650" y="316" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Mono" font-size="9">Revisión por dirección</text>
+
+      <!-- PASILLO CENTRAL -->
+      <rect x="30" y="382" width="722" height="58" rx="4" fill="#162233" stroke="#1F3864" stroke-width="1" stroke-dasharray="5 3"/>
+      <text x="390" y="407" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Sans" font-size="11">Pasillo central de tráfico — 3 m mínimo</text>
+      <text x="390" y="424" text-anchor="middle" fill="#3A5A7A" font-family="IBM Plex Mono" font-size="9">Delimitado con línea amarilla · libre de materiales · rutas de evacuación señalizadas</text>
+
+      <!-- SERVICIOS -->
+      <rect x="30" y="452" width="154" height="90" rx="4" fill="#1A2030" stroke="#546E7A" stroke-width="1"/>
+      <text x="107" y="480" text-anchor="middle" fill="#90A4AE" font-family="IBM Plex Sans" font-size="11" font-weight="600">Mantenimiento</text>
+      <text x="107" y="497" text-anchor="middle" fill="#607D8B" font-family="IBM Plex Mono" font-size="9">Taller · repuestos</text>
+      <text x="107" y="511" text-anchor="middle" fill="#607D8B" font-family="IBM Plex Mono" font-size="9">Lubricantes</text>
+      <text x="107" y="525" text-anchor="middle" fill="#607D8B" font-family="IBM Plex Mono" font-size="9">MP peligrosa</text>
+
+      <rect x="200" y="452" width="154" height="90" rx="4" fill="#1A2030" stroke="#546E7A" stroke-width="1"/>
+      <text x="277" y="484" text-anchor="middle" fill="#90A4AE" font-family="IBM Plex Sans" font-size="11" font-weight="600">Sanitarios</text>
+      <text x="277" y="499" text-anchor="middle" fill="#90A4AE" font-family="IBM Plex Sans" font-size="11" font-weight="600">y vestidores</text>
+      <text x="277" y="517" text-anchor="middle" fill="#607D8B" font-family="IBM Plex Mono" font-size="9">H · M · Regaderas</text>
+      <text x="277" y="531" text-anchor="middle" fill="#607D8B" font-family="IBM Plex Mono" font-size="9">Casilleros</text>
+
+      <rect x="370" y="452" width="154" height="90" rx="4" fill="#1A2030" stroke="#546E7A" stroke-width="1"/>
+      <text x="447" y="487" text-anchor="middle" fill="#90A4AE" font-family="IBM Plex Sans" font-size="11" font-weight="600">Comedor</text>
+      <text x="447" y="504" text-anchor="middle" fill="#607D8B" font-family="IBM Plex Mono" font-size="9">Política calidad visible</text>
+      <text x="447" y="518" text-anchor="middle" fill="#607D8B" font-family="IBM Plex Mono" font-size="9">Tablero KPIs</text>
+
+      <rect x="540" y="452" width="172" height="90" rx="4" fill="#1E1A0A" stroke="#FF6D00" stroke-width="1.2"/>
+      <text x="626" y="478" text-anchor="middle" fill="#FFCC02" font-family="IBM Plex Sans" font-size="11" font-weight="600">Almacén</text>
+      <text x="626" y="493" text-anchor="middle" fill="#FFCC02" font-family="IBM Plex Sans" font-size="11" font-weight="600">químicos</text>
+      <text x="626" y="511" text-anchor="middle" fill="#E65100" font-family="IBM Plex Mono" font-size="9">Pinturas · solventes</text>
+      <text x="626" y="525" text-anchor="middle" fill="#E65100" font-family="IBM Plex Mono" font-size="9">⚠ Ventilación forzada</text>
+
+      <!-- Extintores -->
+      <circle cx="180" cy="50" r="7" fill="#E53935" opacity="0.85"/><text x="180" y="55" text-anchor="middle" fill="white" font-family="IBM Plex Mono" font-size="9" font-weight="700">E</text>
+      <circle cx="368" cy="50" r="7" fill="#E53935" opacity="0.85"/><text x="368" y="55" text-anchor="middle" fill="white" font-family="IBM Plex Mono" font-size="9" font-weight="700">E</text>
+      <circle cx="564" cy="50" r="7" fill="#E53935" opacity="0.85"/><text x="564" y="55" text-anchor="middle" fill="white" font-family="IBM Plex Mono" font-size="9" font-weight="700">E</text>
+      <circle cx="180" cy="395" r="7" fill="#E53935" opacity="0.85"/><text x="180" y="400" text-anchor="middle" fill="white" font-family="IBM Plex Mono" font-size="9" font-weight="700">E</text>
+      <circle cx="370" cy="395" r="7" fill="#E53935" opacity="0.85"/><text x="370" y="400" text-anchor="middle" fill="white" font-family="IBM Plex Mono" font-size="9" font-weight="700">E</text>
+      <circle cx="565" cy="395" r="7" fill="#E53935" opacity="0.85"/><text x="565" y="400" text-anchor="middle" fill="white" font-family="IBM Plex Mono" font-size="9" font-weight="700">E</text>
+
+      <!-- Ruta evacuación -->
+      <path d="M390 558 L390 450 L750 450 L750 300" fill="none" stroke="#4CAF50" stroke-width="1.5" stroke-dasharray="8 4" marker-end="url(#a2)"/>
+      <text x="700" y="444" text-anchor="middle" fill="#4CAF50" font-family="IBM Plex Mono" font-size="9">Ruta evacuacion</text>
+
+      <!-- Flujo de materiales -->
+      <line x1="99" y1="122" x2="99" y2="134" stroke="#4CAF50" stroke-width="1.2" marker-end="url(#a2)"/>
+      <line x1="99" y1="244" x2="99" y2="256" stroke="#4CAF50" stroke-width="1.2" marker-end="url(#a2)"/>
+    </svg>
+
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:#2E75B6"></div>Logística</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#4CAF50"></div>Manufactura</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#FF6D00"></div>Zona riesgo alto</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#7C4DFF"></div>Pintura</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#FFC107"></div>Inspección</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#546E7A"></div>Servicios</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#E53935;border-radius:50%"></div>Extintor CO₂</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#4CAF50"></div>─ ─ Evacuación</div>
+    </div>
+    <div class="note">PRD-LAY-001 · Rev 01 · 2026-03-23 · Layout propuesto. La delimitación con pintura amarilla está en proceso (AC-004). Dimensiones aproximadas. Validar con supervisión antes de implementar.</div>
+  </div>
+</div>
+
+<!-- ══════════ CRÍTICOS ══════════ -->
+<div class="page" id="criticos">
+  <p class="sec-title">Mapa integrado de puntos críticos — calidad y HSE</p>
+  <div class="diagram-box">
+    <div class="diagram-title">PRD-CPQ-001 · Matriz de criticidad integrada · Rev 01</div>
+    <svg width="100%" viewBox="0 0 780 520" style="min-width:600px">
+      <!-- Encabezados -->
+      <rect x="20" y="20" width="108" height="28" rx="4" fill="#1F3864"/>
+      <text x="74" y="39" text-anchor="middle" fill="white" font-family="IBM Plex Mono" font-size="10" font-weight="600">PROCESO</text>
+      <rect x="140" y="20" width="138" height="28" rx="4" fill="#1A3020"/>
+      <text x="209" y="39" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Mono" font-size="10" font-weight="600">CTRL CALIDAD</text>
+      <rect x="290" y="20" width="138" height="28" rx="4" fill="#1A1A0A"/>
+      <text x="359" y="39" text-anchor="middle" fill="#FFE082" font-family="IBM Plex Mono" font-size="10" font-weight="600">KPI ASOCIADO</text>
+      <rect x="440" y="20" width="148" height="28" rx="4" fill="#1E1A2A"/>
+      <text x="514" y="39" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Mono" font-size="10" font-weight="600">RIESGO HSE</text>
+      <rect x="600" y="20" width="160" height="28" rx="4" fill="#1A0A0A"/>
+      <text x="680" y="39" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="10" font-weight="600">PROGRAMA HSE</text>
+
+      <!-- ROW helper: y=60,118,176,234,292 -->
+      <!-- ROW 1: Enderezado/Corte -->
+      <rect x="20" y="58" width="108" height="50" rx="3" fill="#162233" stroke="#2E75B6" stroke-width="0.8"/>
+      <text x="74" y="78" text-anchor="middle" fill="#90CAF9" font-family="IBM Plex Sans" font-size="10" font-weight="600">Enderezado</text>
+      <text x="74" y="93" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Mono" font-size="9">Corte</text>
+      <rect x="140" y="58" width="138" height="50" rx="3" fill="#1A3020" stroke="#4CAF50" stroke-width="0.8"/>
+      <text x="209" y="74" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Mono" font-size="9">Verificación</text>
+      <text x="209" y="87" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Mono" font-size="9">dimensional</text>
+      <text x="209" y="100" text-anchor="middle" fill="#5A9A6A" font-family="IBM Plex Mono" font-size="9">Calibre · cinta métrica</text>
+      <rect x="290" y="58" width="138" height="50" rx="3" fill="#1A1A0A" stroke="#FFC107" stroke-width="0.8"/>
+      <text x="359" y="74" text-anchor="middle" fill="#FFE082" font-family="IBM Plex Mono" font-size="9">P1: NC ≤ 3%</text>
+      <text x="359" y="87" text-anchor="middle" fill="#FFE082" font-family="IBM Plex Mono" font-size="9">P3: Cpk ≥ 1.0</text>
+      <text x="359" y="100" text-anchor="middle" fill="#FFB300" font-family="IBM Plex Mono" font-size="9">I2: Desperdicio ≤4%</text>
+      <rect x="440" y="58" width="148" height="50" rx="3" fill="#1E1A2A" stroke="#7C4DFF" stroke-width="0.8"/>
+      <text x="514" y="74" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Mono" font-size="9">Ruido · partículas</text>
+      <text x="514" y="87" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Mono" font-size="9">Proyección metálica</text>
+      <text x="514" y="100" text-anchor="middle" fill="#9C6DB8" font-family="IBM Plex Mono" font-size="9">EPA auditiva oblig.</text>
+      <rect x="600" y="58" width="160" height="50" rx="3" fill="#1A0A0A" stroke="#E53935" stroke-width="0.8"/>
+      <text x="680" y="78" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="9">HSE-PRG-RUI-002</text>
+      <text x="680" y="93" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="9">HSE-PRG-VIB-003</text>
+
+      <!-- ROW 2: Doblado -->
+      <rect x="20" y="118" width="108" height="50" rx="3" fill="#162233" stroke="#2E75B6" stroke-width="0.8"/>
+      <text x="74" y="138" text-anchor="middle" fill="#90CAF9" font-family="IBM Plex Sans" font-size="10" font-weight="600">Doblado</text>
+      <text x="74" y="153" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Mono" font-size="9">Troquelado</text>
+      <rect x="140" y="118" width="138" height="50" rx="3" fill="#1A3020" stroke="#4CAF50" stroke-width="0.8"/>
+      <text x="209" y="134" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Mono" font-size="9">Ángulos y radios</text>
+      <text x="209" y="147" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Mono" font-size="9">con plantilla</text>
+      <text x="209" y="160" text-anchor="middle" fill="#5A9A6A" font-family="IBM Plex Mono" font-size="9">1ª pieza + muestreo</text>
+      <rect x="290" y="118" width="138" height="50" rx="3" fill="#1A1A0A" stroke="#FFC107" stroke-width="0.8"/>
+      <text x="359" y="134" text-anchor="middle" fill="#FFE082" font-family="IBM Plex Mono" font-size="9">P1: NC ≤ 3%</text>
+      <text x="359" y="147" text-anchor="middle" fill="#FFE082" font-family="IBM Plex Mono" font-size="9">P3: Cpk ≥ 1.0</text>
+      <text x="359" y="160" text-anchor="middle" fill="#EF5350" font-family="IBM Plex Mono" font-size="9">AC-004 activa</text>
+      <rect x="440" y="118" width="148" height="50" rx="3" fill="#1E1A2A" stroke="#7C4DFF" stroke-width="0.8"/>
+      <text x="514" y="134" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Mono" font-size="9">Vibración VMB</text>
+      <text x="514" y="147" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Mono" font-size="9">Atrapamiento</text>
+      <text x="514" y="160" text-anchor="middle" fill="#9C6DB8" font-family="IBM Plex Mono" font-size="9">Guardas · LOTO</text>
+      <rect x="600" y="118" width="160" height="50" rx="3" fill="#1A0A0A" stroke="#E53935" stroke-width="0.8"/>
+      <text x="680" y="138" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="9">HSE-PRG-VIB-003</text>
+      <text x="680" y="153" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="9">HSE-MTR-RGM-001</text>
+
+      <!-- ROW 3: Soldadura -->
+      <rect x="20" y="178" width="108" height="50" rx="3" fill="#1E2A10" stroke="#FF6D00" stroke-width="1.2"/>
+      <text x="74" y="198" text-anchor="middle" fill="#FFAB40" font-family="IBM Plex Sans" font-size="10" font-weight="600">Soldadura</text>
+      <text x="74" y="213" text-anchor="middle" fill="#FF8A65" font-family="IBM Plex Mono" font-size="9">MIG ⚠ crítico</text>
+      <rect x="140" y="178" width="138" height="50" rx="3" fill="#1A3020" stroke="#4CAF50" stroke-width="0.8"/>
+      <text x="209" y="194" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Mono" font-size="9">Visual 100% cordones</text>
+      <text x="209" y="207" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Mono" font-size="9">Continuidad · penetrac.</text>
+      <text x="209" y="220" text-anchor="middle" fill="#5A9A6A" font-family="IBM Plex Mono" font-size="9">IT-SOL-001 pendiente</text>
+      <rect x="290" y="178" width="138" height="50" rx="3" fill="#1A1A0A" stroke="#FFC107" stroke-width="0.8"/>
+      <text x="359" y="194" text-anchor="middle" fill="#FFE082" font-family="IBM Plex Mono" font-size="9">P1: NC ≤ 3%</text>
+      <text x="359" y="207" text-anchor="middle" fill="#FFE082" font-family="IBM Plex Mono" font-size="9">P2: Retrabajo ≤ 2%</text>
+      <text x="359" y="220" text-anchor="middle" fill="#4CAF50" font-family="IBM Plex Mono" font-size="9">AC-002 cerrada</text>
+      <rect x="440" y="178" width="148" height="50" rx="3" fill="#1E1A2A" stroke="#7C4DFF" stroke-width="0.8"/>
+      <text x="514" y="194" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Mono" font-size="9">Humos · Radiación UV</text>
+      <text x="514" y="207" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Mono" font-size="9">Salpicaduras · Elec.</text>
+      <text x="514" y="220" text-anchor="middle" fill="#9C6DB8" font-family="IBM Plex Mono" font-size="9">EPP completo</text>
+      <rect x="600" y="178" width="160" height="50" rx="3" fill="#1A0A0A" stroke="#E53935" stroke-width="0.8"/>
+      <text x="680" y="198" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="9">HSE-PRG-SOL-001</text>
+      <text x="680" y="213" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="9">HSE-FRM-CHK-SOL</text>
+
+      <!-- ROW 4: Pintura -->
+      <rect x="20" y="238" width="108" height="50" rx="3" fill="#1E1A30" stroke="#7C4DFF" stroke-width="1.2"/>
+      <text x="74" y="258" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Sans" font-size="10" font-weight="600">Pintura</text>
+      <text x="74" y="273" text-anchor="middle" fill="#9C6DB8" font-family="IBM Plex Mono" font-size="9">Electrostática ⚠</text>
+      <rect x="140" y="238" width="138" height="50" rx="3" fill="#1A3020" stroke="#4CAF50" stroke-width="0.8"/>
+      <text x="209" y="254" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Mono" font-size="9">Adhesión · espesor</text>
+      <text x="209" y="267" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Mono" font-size="9">Apariencia · uniformidad</text>
+      <text x="209" y="280" text-anchor="middle" fill="#5A9A6A" font-family="IBM Plex Mono" font-size="9">Monit. sulfatos AC-007</text>
+      <rect x="290" y="238" width="138" height="50" rx="3" fill="#1A1A0A" stroke="#FFC107" stroke-width="0.8"/>
+      <text x="359" y="254" text-anchor="middle" fill="#FFE082" font-family="IBM Plex Mono" font-size="9">P4: Rechazo ≤ 1%</text>
+      <text x="359" y="267" text-anchor="middle" fill="#FFE082" font-family="IBM Plex Mono" font-size="9">P2: Retrabajo ≤ 2%</text>
+      <text x="359" y="280" text-anchor="middle" fill="#EF5350" font-family="IBM Plex Mono" font-size="9">Actual: 4% NG ⚠</text>
+      <rect x="440" y="238" width="148" height="50" rx="3" fill="#1E1A2A" stroke="#7C4DFF" stroke-width="0.8"/>
+      <text x="514" y="254" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Mono" font-size="9">Solventes · sulfatos</text>
+      <text x="514" y="267" text-anchor="middle" fill="#CE93D8" font-family="IBM Plex Mono" font-size="9">Riesgo eléctrico</text>
+      <text x="514" y="280" text-anchor="middle" fill="#9C6DB8" font-family="IBM Plex Mono" font-size="9">Temperatura horno</text>
+      <rect x="600" y="238" width="160" height="50" rx="3" fill="#1A0A0A" stroke="#E53935" stroke-width="0.8"/>
+      <text x="680" y="254" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="9">HSE-MTR-RGM-001</text>
+      <text x="680" y="269" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="9">Pendiente: PRG-PIN</text>
+
+      <!-- ROW 5: Inspección final -->
+      <rect x="20" y="298" width="108" height="50" rx="3" fill="#1A1A0A" stroke="#FFC107" stroke-width="1.5"/>
+      <text x="74" y="318" text-anchor="middle" fill="#FFE082" font-family="IBM Plex Sans" font-size="10" font-weight="600">Inspección</text>
+      <text x="74" y="333" text-anchor="middle" fill="#FFB300" font-family="IBM Plex Sans" font-size="10" font-weight="600">final 100%</text>
+      <rect x="140" y="298" width="138" height="50" rx="3" fill="#1A3020" stroke="#4CAF50" stroke-width="0.8"/>
+      <text x="209" y="314" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Mono" font-size="9">Dim. · solda. · pintura</text>
+      <text x="209" y="327" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Mono" font-size="9">Estabilidad · embalaje</text>
+      <text x="209" y="340" text-anchor="middle" fill="#5A9A6A" font-family="IBM Plex Mono" font-size="9">Plan control PLC-001</text>
+      <rect x="290" y="298" width="138" height="50" rx="3" fill="#1A1A0A" stroke="#FFC107" stroke-width="0.8"/>
+      <text x="359" y="314" text-anchor="middle" fill="#FFE082" font-family="IBM Plex Mono" font-size="9">P1: NC ≤ 3%</text>
+      <text x="359" y="327" text-anchor="middle" fill="#FFE082" font-family="IBM Plex Mono" font-size="9">C2: Reclam. ≤ 1%</text>
+      <text x="359" y="340" text-anchor="middle" fill="#FFB300" font-family="IBM Plex Mono" font-size="9">I1: Docs proceso</text>
+      <rect x="440" y="298" width="148" height="50" rx="3" fill="#1A2E45" stroke="#2E75B6" stroke-width="0.8"/>
+      <text x="514" y="314" text-anchor="middle" fill="#90CAF9" font-family="IBM Plex Mono" font-size="9">Cargas manuales</text>
+      <text x="514" y="327" text-anchor="middle" fill="#90CAF9" font-family="IBM Plex Mono" font-size="9">NOM-036-1</text>
+      <text x="514" y="340" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Mono" font-size="9">Riesgo bajo</text>
+      <rect x="600" y="298" width="160" height="50" rx="3" fill="#1A0A0A" stroke="#4CAF50" stroke-width="0.8"/>
+      <text x="680" y="318" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Mono" font-size="9">HSE-MTR-RGM-001</text>
+      <text x="680" y="333" text-anchor="middle" fill="#A5D6A7" font-family="IBM Plex Mono" font-size="9">IT: Levant. seguro</text>
+
+      <!-- Referencias -->
+      <rect x="20" y="366" width="742" height="34" rx="4" fill="#0D1B2A" stroke="#1F3864" stroke-width="1"/>
+      <text x="390" y="380" text-anchor="middle" fill="#5A7A9A" font-family="IBM Plex Mono" font-size="9">Documentos de referencia: SGC-POL-CAL-001 · HSE-MTR-RGM-001 · HSE-PRG-SOL-001 · HSE-PRG-RUI-002 · HSE-PRG-VIB-003 · SGC-LMD-001</text>
+      <text x="390" y="394" text-anchor="middle" fill="#3A5A7A" font-family="IBM Plex Mono" font-size="9">Módulo 06 del portafolio METALFORM SGC · PRD-CPQ-001 · Rev 01 · 2026-03-23</text>
+
+      <!-- Acciones pendientes -->
+      <rect x="20" y="412" width="742" height="58" rx="4" fill="#1A0A0A" stroke="#E53935" stroke-width="1" stroke-dasharray="4 2"/>
+      <text x="390" y="432" text-anchor="middle" fill="#EF9A9A" font-family="IBM Plex Mono" font-size="9" font-weight="600">ACCIONES PENDIENTES DE ALTA PRIORIDAD</text>
+      <text x="390" y="448" text-anchor="middle" fill="#CF6679" font-family="IBM Plex Mono" font-size="9">1. Estudio higiene industrial (ruido) — 60 días  ·  2. Estudio vibración con acelerómetro — 90 días  ·  3. Audiometrías basales — 30 días</text>
+      <text x="390" y="462" text-anchor="middle" fill="#CF6679" font-family="IBM Plex Mono" font-size="9">4. IT-SOL-001  ·  5. IT-PIN-002  ·  6. IT-DOB-003  ·  7. Delimitación layout con pintura amarilla  ·  8. Programa seguridad pintura</text>
+    </svg>
+    <div class="note">PRD-CPQ-001 · Rev 01 · 2026-03-23 · Actualizar ante cambios de proceso, resultados de auditoría o nuevas no conformidades.</div>
+  </div>
+</div>
+
+</div>
+<script>
+function show(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
