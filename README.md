@@ -5,10 +5,25 @@
 
 ## 👤 Sobre este portafolio
 
-Soy **Sergio Montes Cruz**, estudiante de Ingeniería Industrial con experiencia en entornos de manufactura de alta exigencia. Este repositorio documenta mi enfoque práctico hacia la gestión de seguridad e higiene industrial, combinando teoría normativa con herramientas de análisis y visualización de datos.
+Soy Sergio Montes Cruz, Técnico en Calidad con más de 10 años de experiencia en procesos de manufactura de alta precisión y actualmente cursando la Ingeniería Industrial. Me especializo en la digitalización de Sistemas de Gestión y el aseguramiento de la calidad mediante herramientas estadísticas y normativas.
 
 > *"Una empresa que no invierte en la seguridad de su gente, eventualmente paga un costo mucho mayor."*
 
+---
+
+## 📊 Dashboard de Gestión - Vista Previa
+<img width="1416" height="795" alt="image" src="https://github.com/user-attachments/assets/3ea2859b-ea17-4e8f-887e-5674185d6cf1" />
+<img width="1418" height="798" alt="image" src="https://github.com/user-attachments/assets/85e6015a-f151-4836-a3bf-d75029551032" />
+<img width="1414" height="798" alt="image" src="https://github.com/user-attachments/assets/e66d5279-d56c-4a3a-a590-7ccb0966f919" />
+<img width="1420" height="796" alt="image" src="https://github.com/user-attachments/assets/536ce90b-c4c4-47f7-968d-3e8e44cda6bc" />
+<img width="1415" height="798" alt="image" src="https://github.com/user-attachments/assets/177c14dd-88f5-4df0-9e22-aaf8f550adfb" />
+<img width="1415" height="800" alt="image" src="https://github.com/user-attachments/assets/22816ff6-b1a9-4008-a2c7-87a9d0c02452" />
+
+> **Capacidades del Dashboard:**
+> - **KPIs de Calidad:** Monitoreo de % de No Conformidades (P1) y Costos de Retrabajo.
+> - **Seguridad (HSE):** Seguimiento de incidentes, uso de EPP y cumplimiento de programas normativos.
+> - **Avance ISO 9001:** Gráfico de cumplimiento por cláusula para medir la madurez del SGC.
+> - **Acciones Correctivas:** Estatus en tiempo real de AC abiertas, en proceso y cerradas.
 ---
 
 ## 🎯 Objetivo del repositorio
@@ -28,7 +43,14 @@ Demostrar competencias en la **implementación de un Sistema de Gestión de Higi
 **Empresa ficticia:** METALFORM S.A. de C.V.
 **Sector:** Metalmecánico — fabricación de exhibidores metálicos para retail
 **Procesos principales:** Enderezado, doblado, corte, soldadura MIG, pulido, pintura electrostática, embalaje
-**Situación:** Empresa en etapa de consolidación (menos de 1 año en instalaciones actuales), sin certificación ISO, con departamento de calidad de reciente creación
+**Situación:** Empresa en etapa de consolidación (menos de 1 año en instalaciones actuales), sin certificación ISO, con departamento de calidad de reciente creación.
+
+🎯 Marco Estratégico Propuesto
+Como parte de la estructura organizacional, he diseñado la filosofía empresarial para alinear la operación con la dirección:
+
+Misión: Transformar acero en soluciones de exhibición con precisión industrial, garantizando la seguridad del usuario final y la excelencia operativa.
+
+Visión: Consolidarnos como la planta modelo en manufactura metálica, alcanzando la certificación ISO 9001 mediante procesos estandarizados y digitalizados.
 
 ---
 
@@ -78,11 +100,13 @@ Demostrar competencias en la **implementación de un Sistema de Gestión de Higi
 |---|---|
 | Diagnóstico inicial | ✅ Completo |
 | Matriz de riesgos | ✅ Completo |
-| Programas de seguridad | 🔄 En desarrollo |
+| Programas de seguridad |  ✅ Emitidos (Soldadura, Ruido, Vibración)|
 | Documentación ISO | 🔄 En desarrollo |
-| Dashboard Power BI | 🔄 En desarrollo |
+| Dashboard Power BI | ✅ Funcional (Datos Simulados) |
 | Planes de acción | 📋 Pendiente |
-| Diagramas y layout | 📋 Pendiente |
+| Diagramas y layout | ✅ Completo (Modelado en HTML/SVG) |
+
+
 
 
 *Este portafolio es de carácter académico y profesional. Los datos, nombres de empresa y situaciones descritas son ficticios y tienen fines de demostración.*
